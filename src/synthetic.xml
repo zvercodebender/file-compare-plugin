@@ -10,9 +10,6 @@
                 task-description="Compare deployed files">
 	        <parameters>
                         <parameter name="targets" kind="set_of_ci" referenced-type="overthere.Host" description="overtherehost A Name" />
-                        <!--
-                        <parameter name="targetB" kind="ci" referenced-type="overthere.Host" description="overtherehost B Name" />
-                        -->
                 </parameters>
         </method>
 </type-modification>

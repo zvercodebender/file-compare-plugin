@@ -30,25 +30,14 @@ for d in thisCi.deployeds:
             print "%s/%s " % (d.targetPath, d.name)
             remote_path = "%s/%s" % (d.targetPath, d.name)
         else:
-            print "%s/s " % (d.targetPath)
+            print "%s/ " % (d.targetPath)
             remote_path = d.targetPath
         # End if
-        if params.targets.size > 1 :
-            with OverthereHostSession(d.container) as session:
-                diff_lines = remote_diff(session, d.file, remote_path)
-            if len(diff_lines) > 0:
-                print "%s" % (diff_lines)
-                context.logOutput(StringUtils.concat(diff_lines))
-            # End if
-        else:
-            for target in params.targets:
-                with OverthereHostSession(d.container) as session:
-                    diff_lines = remote_diff(session, d.file, remote_path)
-                    if len(diff_lines) > 0:
-                        print "%s" % (diff_lines)
-                        context.logOutput(StringUtils.concat(diff_lines))
-                    # End if
-            # end for
+        with OverthereHostSession(d.container) as session:
+            diff_lines = remote_diff(session, d.file, remote_path)
+        if len(diff_lines) > 0:
+            print "%s" % (diff_lines)
+            context.logOutput(StringUtils.concat(diff_lines))
         # End if
     # End if  
 # End for

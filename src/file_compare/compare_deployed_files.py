@@ -13,16 +13,6 @@ def remote_diff(session, source_file, remote_path):
     return response.stdout
 # End Def
 
-#def local_diff(session, source_file, remote_path, sessionA, sessionB):
-#    context.logOutput(remote_path)
-#    local_fileA = "/somepath" . "/hostnameA/" . local_fileA
-#    local_fileB = "/somepath" . "/hostnameB/" . local_fileB
-#    sessionA.copy_to(remote_path, local_fileA)
-#    sessionB.copy_to(remote_path, local_fileB)
-#    response = execute("diff %s %s" % (local_fileA, local_fileB), check_success=False)
-#    return response.stdout
-# End Def
-
 for d in thisCi.deployeds:
     dtype = str(d.deployable.type)
     if dtype == "file.File" or dtype == "file.Folder":

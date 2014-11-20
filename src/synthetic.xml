@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+    Note: If you modify this file, you must restart the XL Deploy server.
+-->
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<type-modification type="udm.DeployedApplication">
+        <method name="compareDeployedFiles" 
+                delegate="jython" 
+                script="file_compare/compare_deployed_files.py" 
+                task-description="Compare deployed files">
+	        <parameters>
+                        <parameter name="targets" kind="set_of_ci" referenced-type="overthere.Host" description="overtherehost A Name" />
+                </parameters>
+        </method>
+</type-modification>
+</synthetic>

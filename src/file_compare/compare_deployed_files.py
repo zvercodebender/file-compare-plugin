@@ -1,5 +1,6 @@
 from __future__ import with_statement
 import sys
+import com.xebialabs.deployit.plugin.api.udm.Parameters
 from overtherepy import OverthereHostSession, StringUtils
 
 def remote_diff(session, source_file, remote_path):
@@ -23,11 +24,17 @@ for d in thisCi.deployeds:
             print "%s/ " % (d.targetPath)
             remote_path = d.targetPath
         # End if
-        with OverthereHostSession(d.container) as session:
-            diff_lines = remote_diff(session, d.file, remote_path)
-        if len(diff_lines) > 0:
-            print "%s" % (diff_lines)
-            context.logOutput(StringUtils.concat(diff_lines))
+        targets = parameters["targets"]
+        print targets
+        if len(targets) > 1 :
+            print "Deal with multiple hosts"
+        else:
+            with OverthereHostSession(d.container) as session:
+                diff_lines = remote_diff(session, d.file, remote_path)
+            if len(diff_lines) > 0:
+                print "%s" % (diff_lines)
+                context.logOutput(StringUtils.concat(diff_lines))
+            # End if
         # End if
     # End if  
 # End for

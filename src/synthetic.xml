@@ -8,8 +8,15 @@
                 delegate="jython" 
                 script="file_compare/compare_deployed_files.py" 
                 task-description="Compare deployed files">
-	        <parameters>
-                        <parameter name="targets" kind="set_of_ci" referenced-type="overthere.Host" description="overtherehost A Name" />
+        </method>
+        <method name="compareInstalledFiles"
+                delegate="jython"
+                script="file_compare/compare_installed_files.py"
+                task-description="Compare deployed files">
+                <parameters>
+                        <parameter name="targets" kind="set_of_ci"
+                                   referenced-type="overthere.Host"
+                                   description="overtherehost A Name" />
                 </parameters>
         </method>
 </type-modification>

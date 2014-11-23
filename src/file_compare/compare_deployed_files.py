@@ -4,7 +4,7 @@ import com.xebialabs.deployit.plugin.api.udm.Parameters
 from overtherepy import OverthereHostSession, StringUtils
 
 def remote_diff(session, source_file, remote_path):
-    context.logOutput(remote_path)
+    #context.logOutput(remote_path)
     if source_file.isDirectory():
         t = session.work_dir_file("tmp")
     else:
@@ -18,23 +18,20 @@ for d in thisCi.deployeds:
     dtype = str(d.deployable.type)
     if dtype == "file.File" or dtype == "file.Folder":
         if dtype == "file.File":
-            print "%s/%s " % (d.targetPath, d.name)
+            #print "%s/%s " % (d.targetPath, d.name)
             remote_path = "%s/%s" % (d.targetPath, d.name)
         else:
-            print "%s/ " % (d.targetPath)
+            #print "%s/ " % (d.targetPath)
             remote_path = d.targetPath
         # End if
-        targets = parameters["targets"]
-        print targets
-        if len(targets) > 1 :
-            print "Deal with multiple hosts"
-        else:
-            with OverthereHostSession(d.container) as session:
-                diff_lines = remote_diff(session, d.file, remote_path)
-            if len(diff_lines) > 0:
-                print "%s" % (diff_lines)
-                context.logOutput(StringUtils.concat(diff_lines))
-            # End if
+        sys.stdout.write("+--------------------------------------------")
+        sys.stdout.write("|         %s on %s" % (d.name, d.container))
+        sys.stdout.write("+--------------------------------------------")
+        with OverthereHostSession(d.container) as session:
+            diff_lines = remote_diff(session, d.file, remote_path)
+        if len(diff_lines) > 0:
+            print "%s" % (diff_lines)
+            context.logOutput(StringUtils.concat(diff_lines))
         # End if
     # End if  
 # End for

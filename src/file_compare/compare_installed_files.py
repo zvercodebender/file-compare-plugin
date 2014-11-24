@@ -11,7 +11,7 @@ def server_diff(hostA, hostB, source_file, remote_path):
     global StringUtils
     global Diff
 
-    context.logOutput(remote_path)
+    #context.logOutput(remote_path)
     localOpts = LocalConnectionOptions(os=OperatingSystemFamily.UNIX)
     local_session =  OverthereHostSession(OverthereHost(localOpts))
     sessionA = OverthereHostSession(hostA)
@@ -53,10 +53,17 @@ for d in thisCi.deployeds:
             hostA = targets.pop()
             hostB = targets.pop()
             diff_lines = server_diff(hostA, hostB, d.name, remote_path)
+            context.logOutput("+-------------------------------------------------")
+            context.logOutput("| compare ")
+            context.logOutput("| %s @ %s " % (d.name, hostA))
+            context.logOutput("| to ")
+            context.logOutput("| %s @ %s " % (d.name, hostB))
+            context.logOutput("+-------------------------------------------------")
             if len(diff_lines) > 0:
-                print "%s" % (diff_lines)
+                #context.logOutput("%s" % (diff_lines))
                 context.logOutput(StringUtils.concat(diff_lines))
             # End if
+            context.logOutput("+-------------------------------------------------")
         # End if
     # End if  
     break

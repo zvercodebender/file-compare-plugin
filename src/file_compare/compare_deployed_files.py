@@ -24,14 +24,15 @@ for d in thisCi.deployeds:
             #print "%s/ " % (d.targetPath)
             remote_path = d.targetPath
         # End if
-        sys.stdout.write("+--------------------------------------------")
-        sys.stdout.write("|         %s on %s" % (d.name, d.container))
-        sys.stdout.write("+--------------------------------------------")
         with OverthereHostSession(d.container) as session:
             diff_lines = remote_diff(session, d.file, remote_path)
+        context.logOutput("+--------------------------------------------")
+        context.logOutput("|         %s on %s" % (d.name, d.container))
+        context.logOutput("+--------------------------------------------")
         if len(diff_lines) > 0:
-            print "%s" % (diff_lines)
+            #print "%s" % (diff_lines)
             context.logOutput(StringUtils.concat(diff_lines))
         # End if
+        context.logOutput("+--------------------------------------------")
     # End if  
 # End for

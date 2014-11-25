@@ -66,5 +66,4 @@ for d in thisCi.deployeds:
             context.logOutput("+-------------------------------------------------")
         # End if
     # End if  
-    break
 # End for
